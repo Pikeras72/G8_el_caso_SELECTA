@@ -179,6 +179,14 @@ body[data-idx="0"] .hud-top>*{pointer-events:none}
 .laws{display:flex;flex-wrap:wrap;gap:8px}
 .law[data-tip]{cursor:help;transition:background .2s,border-color .2s}
 .law[data-tip]:hover,.law[data-tip]:focus-visible,.law[data-tip].tip-on{background:rgba(255,255,255,.2);border-color:var(--sun)}
+.answers{display:grid;gap:12px;width:min(900px,100%)}
+.acard{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:.75em 1.1em;border-radius:16px;background:rgba(255,255,255,.1);border:2px solid var(--line);text-align:left;transition:background .5s,border-color .5s}
+.acard b{font-family:var(--f-display);font-weight:400;font-size:clamp(1.05rem,calc(var(--u)*2),2rem)}
+.okstamp{display:none;font-family:var(--f-display);font-size:clamp(.85rem,calc(var(--u)*1.35),1.35rem);color:var(--ink);background:var(--mint);padding:.3em .7em;border-radius:10px;transform:rotate(-2deg);box-shadow:0 5px 0 #0f9b70}
+.answers.done .acard{background:rgba(34,227,166,.14);border-color:var(--mint)}
+.answers.done .nostamp{display:none}
+.answers.done .okstamp{display:inline-block;animation:stamp .5s cubic-bezier(.2,1.6,.4,1) both;animation-delay:calc(var(--k,0) * 260ms)}
+.answers.done .acard:nth-child(2) .okstamp{--k:1} .answers.done .acard:nth-child(3) .okstamp{--k:2}
 .riskcmp{display:flex;align-items:center;justify-content:center;gap:clamp(12px,calc(var(--u)*3),44px);flex-wrap:wrap;width:100%}
 .rbox{display:grid;justify-items:center;gap:6px;min-width:min(300px,100%);padding:clamp(16px,calc(var(--u)*2.6),34px) clamp(22px,calc(var(--u)*4),56px);border-radius:var(--r)}
 .rbox.hi{background:linear-gradient(150deg,rgba(255,71,96,.95),rgba(160,16,60,.9));box-shadow:0 10px 0 #7a0f2f,0 0 60px rgba(255,71,96,.45)}
@@ -880,15 +888,14 @@ button{font:inherit}
 <!-- 23 · Cierre -->
 <section class="slide" id="s-end" data-scene="end" data-chapter="6" data-steps="2">
   <div class="wrap center stack">
-    <p class="kicker rv" style="--i:0"><span data-b="first"></span> y SELECTA son inventadas. El riesgo, no.</p>
-    <h2 class="h1 rv" style="--i:1">Riesgo para los candidatos</h2>
-    <div class="riskcmp">
-      <div class="rbox hi rv" style="--i:2"><span class="rwhen">Sin medidas</span><b class="rlvl">Alto</b><span class="rmix">9 riesgos altos · 4 medios</span></div>
-      <svg class="rarrow" data-step="1" viewBox="0 0 60 40" aria-hidden="true"><path d="M4 20h44M36 6l14 14-14 14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div class="rbox mid" data-step="1"><span class="rwhen">Con medidas</span><b class="rlvl">Medio</b><span class="rmix">0 altos · 5 medios · 8 bajos</span></div>
+    <p class="kicker rv" style="--i:0"><span data-b="first"></span> y SELECTA son inventadas.</p>
+    <h2 class="h1 rv" style="--i:1">Las tres preguntas de <span data-b="first"></span></h2>
+    <div class="answers" id="answers">
+      <div class="acard rv" style="--i:2"><b>¿Quién lo decidió?</b><span class="nostamp">Sin respuesta</span><span class="okstamp">SELECTA propone, la Comisión decide</span></div>
+      <div class="acard rv" style="--i:3"><b>¿Por qué?</b><span class="nostamp">Sin respuesta</span><span class="okstamp">Nota media, titulación e idiomas</span></div>
+      <div class="acard rv" style="--i:4"><b>¿Cómo lo recurro?</b><span class="nostamp">Sin respuesta</span><span class="okstamp">Revisión antes de la lista definitiva</span></div>
     </div>
-    <div class="laws rv" style="--i:3"><span class="law" data-icon-law data-tip="La categoría del RIA depende del uso del sistema, no de sus medidas: decidir admisiones a centros educativos es siempre de alto riesgo. Las medidas no quitan la etiqueta; son precisamente las obligaciones que esa etiqueta impone.">Para el RIA sigue siendo de alto riesgo · Anexo III, punto 3</span></div>
-    <p class="lead" data-step="2">Con estas medidas, SELECTA puede ayudar a la Comisión <strong class="hl">sin dejar a nadie fuera sin una explicación.</strong></p>
+    <p class="lead" data-step="2">Detrás de cada solicitud hay una persona que <strong class="hl">merece saber por qué.</strong></p>
   </div>
 </section>
 
@@ -1105,7 +1112,7 @@ const NOTES = {
   'replay': [20, 'Repetición', '«Misma persona, mismos méritos, nuevas reglas.» Clic: la Comisión revisa y motiva.'],
   'final': [12, 'Cierre del círculo', 'La misma notificación del principio, ahora con motivos y una vía para pedir revisión.'],
   'map': [20, 'Mapa de riesgos', '«Nuestra evaluación tiene 13 riesgos.» Clic: los riesgos bajan de franja. Ninguno se queda en alto.'],
-  'end': [20, 'Final', 'La protagonista y SELECTA son inventadas, el riesgo no. Riesgo para los derechos de los candidatos (EIPD): sin medidas, alto (9 altos, 4 medios). Clic: con medidas, medio (0 altos, 5 medios, 8 bajos). Aclara que para el RIA sigue siendo un sistema de alto riesgo: la categoría depende del uso. Clic: frase de cierre.'],
+  'end': [20, 'Final', 'La protagonista y SELECTA son inventadas. Vuelven las tres preguntas del correo, sin respuesta. Clic: ahora todas tienen respuesta (la Comisión decide, motivos de mérito, revisión antes de la lista). Clic: frase de cierre y pasa a Gracias.'],
   'thanks': [10, 'Preguntas', 'Agradece y abre el turno de preguntas.']
 };
 
@@ -1511,6 +1518,7 @@ function mapPlace(after, animate) {
   });
 }
 H.map = { enter() { mapPlace(false, false); }, step(n, instant) { mapPlace(true, !instant); } };
+H.end = { enter() { $('#answers').classList.remove('done'); }, step(n) { if (n === 1) $('#answers').classList.add('done'); } };
 
 /* ================= Bocadillos de las leyes ================= */
 const tipBox = $('#tipbox');
