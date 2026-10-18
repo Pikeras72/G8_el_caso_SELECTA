@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>El caso SELECTA</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Presentación interactiva: una máquina decide quién entra en el Máster de Acceso a la Abogacía. Evaluación de impacto en protección de datos.">
@@ -477,9 +482,9 @@ button{font:inherit}
 .sres.show{opacity:1;transform:none}
 .sres .crumb{font-size:var(--t-small);color:#0b7a55;font-weight:700}
 .sres h3{margin:0;color:#3a2ccf;font-weight:800;font-size:var(--t-lead);line-height:1.2}
-.ltable{width:100%;border-collapse:collapse;font-size:clamp(.72rem,calc(var(--u)*1.08),1.08rem)}
+.ltable{width:100%;border-collapse:collapse;color:var(--card-ink);font-size:clamp(.72rem,calc(var(--u)*1.08),1.08rem)}
 .ltable th{text-align:left;font-size:.78em;text-transform:uppercase;letter-spacing:.06em;color:var(--card-dim);padding:.4em .5em;border-bottom:2px solid var(--card-line)}
-.ltable td{padding:.45em .5em;border-bottom:1px solid var(--card-line);font-family:var(--f-mono);white-space:nowrap}
+.ltable td{color:var(--card-ink);padding:.45em .5em;border-bottom:1px solid var(--card-line);font-family:var(--f-mono);white-space:nowrap}
 .ltable tr.me td{background:#fff1c7;font-weight:600}
 .ltable .hot{transition:all .5s;border-radius:6px}
 .leaked .ltable tr.me .hot{background:var(--danger);color:#fff;box-shadow:0 0 0 3px rgba(255,71,96,.35)}
@@ -1484,7 +1489,7 @@ H.leak = {
 const MEASURES = [
   { id: 'd1', tip: 'El art. 14 CE prohíbe discriminar. Una regla en apariencia neutra que perjudica más a un grupo también discrimina: el barrio o el empleo hacen de sustitutos del origen o el género.', good: false, t: 'Quitar solo el género', why: 'El barrio, la universidad o el empleo siguen delatando origen, clase y género.', law: 'Discriminación indirecta · art. 14 CE' },
   { id: 'm1', tip: 'Solo pueden tratarse los datos necesarios para cada fin (art. 5.1.c). Para puntuar el mérito bastan tres. El art. 25 exige que el sistema venga configurado así desde el diseño y por defecto.', good: true, t: 'Puntuar solo con nota, título e idiomas', why: 'Son los únicos datos de mérito. La universidad guarda el resto para el expediente, pero SELECTA no los usa.', law: 'Minimización · arts. 5.1.c y 25 RGPD' },
-  { id: 'd2', tip: 'Nadie puede quedar sometido a una decisión basada solo en un tratamiento automatizado que le afecte de forma significativa, salvo excepciones tasadas y con garantías. Quedarse fuera de un máster habilitante lo es.', good: false, t: 'Que SELECTA decida sola, sin sesgos humanos', why: 'Aprendió de decisiones humanas: hereda sus sesgos y nadie la corrige.', law: 'Prohibido sin intervención humana · art. 22 RGPD' },
+  { id: 'd2', tip: 'Nadie puede quedar sometido a una decisión basada solo en un tratamiento automatizado que le afecte de forma significativa, salvo excepciones tasadas y con garantías. Quedarse fuera de un máster habilitante lo es.', good: false, t: 'Que SELECTA decida sola, sin revisión humana', why: 'Aprendió de decisiones humanas: hereda sus sesgos y nadie la corrige.', law: 'Prohibido sin intervención humana · art. 22 RGPD' },
   { id: 'm2', tip: 'Con una revisión humana real, la decisión deja de ser solo automatizada (art. 22 RGPD). El art. 26.2 RIA exige que la supervisen personas con formación y autoridad para corregir al sistema.', good: true, t: 'Una persona revisa todas las exclusiones', why: 'La revisión humana solo cuenta si puede cambiar el resultado.', law: 'Art. 22 RGPD · art. 26.2 RIA' },
   { id: 'd3', tip: 'Los arts. 13 a 15 dan derecho a información significativa sobre la lógica de la decisión, también mediante el derecho de acceso. Sin esa información no hay forma real de recurrir (art. 24 CE).', good: false, t: 'Mantener en secreto cómo puntúa', why: 'Si nadie sabe cómo se puntúa, nadie puede recurrir.', law: 'Arts. 13–15 RGPD · art. 24 CE' },
   { id: 'm3', tip: 'El art. 22.3 garantiza poder dar su punto de vista e impugnar la decisión; el art. 86 RIA, recibir una explicación de los motivos. Con ambos puede pedir revisión antes de la lista definitiva.', good: true, t: 'Explicar a cada candidata sus motivos', why: 'Con los motivos en la mano, puede pedir revisión o recurrir.', law: 'Art. 22.3 RGPD · art. 86 RIA' }
