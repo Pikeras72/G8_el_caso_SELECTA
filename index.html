@@ -518,6 +518,8 @@ button{font:inherit}
 .ltok{display:flex;flex-wrap:wrap;gap:clamp(6px,calc(var(--u)*.9),12px);min-height:clamp(38px,calc(var(--u)*5),64px);align-items:center}
 .rtok{width:clamp(38px,calc(var(--u)*5),64px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#fff6ea;color:var(--ink);
   font-family:var(--f-mono);font-weight:600;font-size:clamp(.68rem,calc(var(--u)*1.05),1.05rem);box-shadow:0 6px 14px rgba(0,0,0,.28)}
+.rtok{cursor:help;transition:transform .2s,box-shadow .2s}
+.rtok:hover,.rtok:focus-visible,.rtok.tip-on{transform:scale(1.18);box-shadow:0 0 0 3px var(--sun),0 8px 18px rgba(0,0,0,.35);outline:0}
 @media (max-width:600px){.lane{grid-template-columns:1fr auto}.ltok{grid-column:1/-1}}
 
 /* ---------- Varios ---------- */
@@ -879,13 +881,13 @@ button{font:inherit}
 <section class="slide" id="s-end" data-scene="end" data-chapter="6" data-steps="2">
   <div class="wrap center stack">
     <p class="kicker rv" style="--i:0"><span data-b="first"></span> y SELECTA son inventadas. El riesgo, no.</p>
-    <h2 class="h1 rv" style="--i:1">Riesgo de SELECTA</h2>
+    <h2 class="h1 rv" style="--i:1">Riesgo para los candidatos</h2>
     <div class="riskcmp">
       <div class="rbox hi rv" style="--i:2"><span class="rwhen">Sin medidas</span><b class="rlvl">Alto</b><span class="rmix">9 riesgos altos · 4 medios</span></div>
       <svg class="rarrow" data-step="1" viewBox="0 0 60 40" aria-hidden="true"><path d="M4 20h44M36 6l14 14-14 14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="rbox mid" data-step="1"><span class="rwhen">Con medidas</span><b class="rlvl">Medio</b><span class="rmix">0 altos · 5 medios · 8 bajos</span></div>
     </div>
-    <div class="laws rv" style="--i:3"><span class="law" data-icon-law data-tip="El Reglamento de IA considera de alto riesgo los sistemas que deciden el acceso o la admisión a centros educativos. SELECTA lo es: debe cumplir requisitos de supervisión humana, calidad de los datos y transparencia.">Sistema de alto riesgo · Anexo III, punto 3 RIA</span></div>
+    <div class="laws rv" style="--i:3"><span class="law" data-icon-law data-tip="La categoría del RIA depende del uso del sistema, no de sus medidas: decidir admisiones a centros educativos es siempre de alto riesgo. Las medidas no quitan la etiqueta; son precisamente las obligaciones que esa etiqueta impone.">Para el RIA sigue siendo de alto riesgo · Anexo III, punto 3</span></div>
     <p class="lead" data-step="2">Con estas medidas, SELECTA puede ayudar a la Comisión <strong class="hl">sin dejar a nadie fuera sin una explicación.</strong></p>
   </div>
 </section>
@@ -1103,7 +1105,7 @@ const NOTES = {
   'replay': [20, 'Repetición', '«Misma persona, mismos méritos, nuevas reglas.» Clic: la Comisión revisa y motiva.'],
   'final': [12, 'Cierre del círculo', 'La misma notificación del principio, ahora con motivos y una vía para pedir revisión.'],
   'map': [20, 'Mapa de riesgos', '«Nuestra evaluación tiene 13 riesgos.» Clic: los riesgos bajan de franja. Ninguno se queda en alto.'],
-  'end': [20, 'Final', 'La protagonista y SELECTA son inventadas, el riesgo no. Sin medidas el riesgo del sistema es alto (9 altos, 4 medios). Clic: con medidas, medio (0 altos, 5 medios, 8 bajos). Clic: frase de cierre.'],
+  'end': [20, 'Final', 'La protagonista y SELECTA son inventadas, el riesgo no. Riesgo para los derechos de los candidatos (EIPD): sin medidas, alto (9 altos, 4 medios). Clic: con medidas, medio (0 altos, 5 medios, 8 bajos). Aclara que para el RIA sigue siendo un sistema de alto riesgo: la categoría depende del uso. Clic: frase de cierre.'],
   'thanks': [10, 'Preguntas', 'Agradece y abre el turno de preguntas.']
 };
 
@@ -1498,7 +1500,7 @@ const RISKS = [
 let mapToks = null;
 function mapPlace(after, animate) {
   const lanes = {}; $$('#lanes .lane').forEach(l => { lanes[l.dataset.lv] = $('.ltok', l); });
-  if (!mapToks) mapToks = RISKS.map(r => { const t = document.createElement('span'); t.className = 'rtok'; t.textContent = r[0]; t.title = r[0] + ' · ' + r[1]; return t; });
+  if (!mapToks) mapToks = RISKS.map(r => { const t = document.createElement('span'); t.className = 'rtok'; t.textContent = r[0]; t.dataset.tip = r[0] + ' · ' + r[1]; t.tabIndex = 0; return t; });
   const first = animate && !reduceMotion ? mapToks.map(t => t.getBoundingClientRect()) : null;
   RISKS.forEach((r, i) => lanes[after ? r[3] : r[2]].appendChild(mapToks[i]));
   $$('#lanes .lane').forEach(l => { const n = $('.ltok', l).children.length; $('.lcount', l).textContent = n; l.classList.toggle('empty', n === 0); });
@@ -1515,7 +1517,7 @@ const tipBox = $('#tipbox');
 let tipFor = null;
 function showTip(el) {
   if (!el || !el.dataset.tip) return;
-  tipFor = el; $$('.law.tip-on').forEach(x => x.classList.remove('tip-on')); el.classList.add('tip-on');
+  tipFor = el; $$('.tip-on').forEach(x => x.classList.remove('tip-on')); el.classList.add('tip-on');
   tipBox.textContent = el.dataset.tip; tipBox.classList.remove('below');
   const r = el.getBoundingClientRect(), b = tipBox.getBoundingClientRect(), m = 12;
   let left = Math.min(Math.max(m, r.left + r.width / 2 - b.width / 2), innerWidth - b.width - m);
@@ -1526,11 +1528,11 @@ function showTip(el) {
   tipBox.classList.add('show');
 }
 function hideTip() { tipFor && tipFor.classList.remove('tip-on'); tipFor = null; tipBox.classList.remove('show'); }
-document.addEventListener('mouseover', e => { const l = e.target.closest('.law[data-tip]'); if (l && l !== tipFor) showTip(l); });
-document.addEventListener('mouseout', e => { const l = e.target.closest('.law[data-tip]'); if (l && !l.contains(e.relatedTarget)) hideTip(); });
-document.addEventListener('focusin', e => { const l = e.target.closest('.law[data-tip]'); if (l) showTip(l); });
-document.addEventListener('focusout', e => { if (e.target.closest('.law[data-tip]')) hideTip(); });
-document.addEventListener('click', e => { const l = e.target.closest('.law[data-tip]'); if (l) { e.stopPropagation(); tipFor === l ? hideTip() : showTip(l); } else if (tipFor) hideTip(); }, true);
+document.addEventListener('mouseover', e => { const l = e.target.closest('[data-tip]'); if (l && l !== tipFor) showTip(l); });
+document.addEventListener('mouseout', e => { const l = e.target.closest('[data-tip]'); if (l && !l.contains(e.relatedTarget)) hideTip(); });
+document.addEventListener('focusin', e => { const l = e.target.closest('[data-tip]'); if (l) showTip(l); });
+document.addEventListener('focusout', e => { if (e.target.closest('[data-tip]')) hideTip(); });
+document.addEventListener('click', e => { const l = e.target.closest('[data-tip]'); if (l) { e.stopPropagation(); tipFor === l ? hideTip() : showTip(l); } else if (tipFor) hideTip(); }, true);
 addEventListener('scroll', hideTip, true);
 addEventListener('resize', hideTip);
 
