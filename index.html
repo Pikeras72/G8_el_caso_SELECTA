@@ -177,6 +177,14 @@ body[data-idx="0"] .hud-top>*{pointer-events:none}
 .law{display:inline-flex;align-items:center;gap:.5em;font-family:var(--f-mono);font-size:var(--t-small);font-weight:500;padding:.35em .8em;border-radius:999px;background:rgba(0,0,0,.3);border:1px solid var(--line);color:var(--paper)}
 .law svg{width:1.1em;height:1.1em;flex:none}
 .laws{display:flex;flex-wrap:wrap;gap:8px}
+.law[data-tip]{cursor:help;transition:background .2s,border-color .2s}
+.law[data-tip]:hover,.law[data-tip]:focus-visible,.law[data-tip].tip-on{background:rgba(255,255,255,.2);border-color:var(--sun)}
+.tipbox{position:fixed;z-index:60;left:0;top:0;width:max-content;max-width:min(400px,calc(100vw - 32px));padding:12px 15px;border-radius:14px;
+  background:var(--card);color:var(--card-ink);font-family:var(--f-body);font-weight:600;font-size:clamp(15px,calc(var(--u)*1.3),19px);line-height:1.38;
+  box-shadow:0 18px 44px rgba(0,0,0,.45),0 0 0 2px var(--sun);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .16s,transform .16s}
+.tipbox.show{opacity:1;transform:none}
+.tipbox::after{content:"";position:absolute;left:var(--ax,50%);width:14px;height:14px;margin-left:-7px;background:var(--card);transform:rotate(45deg);bottom:-7px;box-shadow:2px 2px 0 var(--sun)}
+.tipbox.below::after{bottom:auto;top:-7px;box-shadow:-2px -2px 0 var(--sun)}
 .center .laws{justify-content:center}
 
 /* ---------- Controles ---------- */
@@ -651,7 +659,7 @@ button{font:inherit}
       <div class="rnode" data-step="2"><div class="ring" data-icon="cloud"></div><b>Nube en la UE</b><span class="role">Guarda los datos · subencargado</span><span class="flag ok">Tu solicitud se queda aquí</span></div>
       <div class="rnode out" data-step="3"><div class="ring" data-icon="headset"></div><b>Soporte técnico de esa nube</b><span class="role">Trabaja desde EE.&nbsp;UU.</span><span class="flag">Fuera de la UE</span></div>
     </div>
-    <div class="center" data-step="3"><span class="law" data-icon-law>Acceder desde fuera de la UE también es una transferencia internacional · arts. 44–46 RGPD</span></div>
+    <div class="center" data-step="3"><span class="law" data-icon-law data-tip="Aunque los datos se guarden en la UE, que el soporte de EE. UU. pueda verlos en remoto cuenta como transferencia internacional. Solo es lícita si hay decisión de adecuación (art. 45) o garantías como las cláusulas contractuales tipo (art. 46).">Acceder desde fuera de la UE también es una transferencia internacional · arts. 44–46 RGPD</span></div>
   </div>
 </section>
 
@@ -754,7 +762,7 @@ button{font:inherit}
         <div class="qcard" data-step="1"><b>¿Quién lo decidió?</b><span class="nostamp">Sin respuesta</span></div>
         <div class="qcard" data-step="2"><b>¿Por qué?</b><span class="nostamp">Sin respuesta</span></div>
         <div class="qcard" data-step="3"><b>¿Cómo lo recurro?</b><span class="nostamp">Sin respuesta</span></div>
-        <div class="laws" data-step="3"><span class="law" data-icon-law>Arts. 13, 14 y 22.3 RGPD</span><span class="law" data-icon-law>Art. 86 RIA</span><span class="law" data-icon-law>Tutela judicial · art. 24 CE</span></div>
+        <div class="laws" data-step="3"><span class="law" data-icon-law data-tip="Los arts. 13 y 14 obligan a avisarle de que decide un sistema automático, con qué lógica y qué consecuencias. El 22.3 le da derecho a que lo revise una persona, a dar su punto de vista y a impugnar la decisión.">Arts. 13, 14 y 22.3 RGPD</span><span class="law" data-icon-law data-tip="Quien se ve afectado por una decisión basada en un sistema de IA de alto riesgo tiene derecho a una explicación clara del papel del sistema y de los elementos principales de la decisión.">Art. 86 RIA</span><span class="law" data-icon-law data-tip="Derecho a la tutela judicial efectiva. Si no conoce los motivos de su exclusión, no puede recurrirla con eficacia: queda indefensa.">Tutela judicial · art. 24 CE</span></div>
       </div>
     </div>
   </div>
@@ -774,7 +782,7 @@ button{font:inherit}
     </div>
     <div class="stack" data-step="1">
       <p class="lead"><strong>Con su documento completo y su nota.</strong> A la vista de cualquiera.</p>
-      <div class="laws"><span class="law" data-icon-law>DA 7.ª LOPDGDD: nombre y 4 cifras del documento</span></div>
+      <div class="laws"><span class="law" data-icon-law data-tip="Al publicar actos con datos personales, la administración debe identificar a cada persona con nombre, apellidos y solo cuatro cifras del documento. Publicar el documento completo y la nota, abierto a cualquiera, va más allá de lo necesario.">DA 7.ª LOPDGDD: nombre y 4 cifras del documento</span></div>
     </div>
   </div>
 </section>
@@ -862,7 +870,7 @@ button{font:inherit}
   <div class="wrap center stack">
     <h2 class="mega rv" style="--i:0"><span data-b="first"></span> y SELECTA son inventadas.</h2>
     <p class="lead rv" style="--i:1">El riesgo es real: el Reglamento de IA ya considera <strong>de alto riesgo</strong> los sistemas que deciden quién entra en una universidad.</p>
-    <div class="laws rv" style="--i:2"><span class="law" data-icon-law>Anexo III, punto 3 · Reglamento de IA</span></div>
+    <div class="laws rv" style="--i:2"><span class="law" data-icon-law data-tip="El Reglamento de IA considera de alto riesgo los sistemas que deciden el acceso o la admisión a centros educativos. SELECTA lo es: debe cumplir requisitos de supervisión humana, calidad de los datos y transparencia.">Anexo III, punto 3 · Reglamento de IA</span></div>
     <p class="big-q" data-step="1">Si mañana una máquina decidiera vuestra plaza, <span class="hl">¿qué querríais saber?</span></p>
   </div>
 </section>
@@ -891,6 +899,7 @@ button{font:inherit}
   </div>
 </footer>
 
+<div class="tipbox" id="tipbox" role="tooltip" aria-hidden="true"></div>
 <div class="panel" id="notes" hidden></div>
 <div class="panel" id="help" hidden>
   <h4>Controles</h4>
@@ -1094,6 +1103,7 @@ $('#levels').innerHTML = CHAPTERS.map((c, i) => `<li data-ch="${i}"><span class=
 function hydrateIcons(root = document) {
   $$('[data-icon]', root).forEach(el => { if (!el.dataset.iconDone) { el.insertAdjacentHTML('afterbegin', I[el.dataset.icon] || ''); el.dataset.iconDone = 1; } });
   $$('[data-icon-law]', root).forEach(el => { if (!el.dataset.iconDone) { el.insertAdjacentHTML('afterbegin', I.law); el.dataset.iconDone = 1; } });
+  $$('.law[data-tip]', root).forEach(el => { el.tabIndex = 0; });
   $$('[data-avatar]', root).forEach(el => { el.innerHTML = AV[el.dataset.avatar](); });
   $$('[data-bot]', root).forEach(el => { el.innerHTML = BOT; });
 }
@@ -1101,6 +1111,7 @@ function hydrateIcons(root = document) {
 function showSteps(sl, n) { $$('[data-step]', sl).forEach(el => el.classList.toggle('shown', +el.dataset.step <= n)); }
 
 function go(n, back = false) {
+  hideTip();
   n = Math.max(0, Math.min(slides.length - 1, n));
   const prevId = ids[idx];
   if (H[prevId] && H[prevId].leave) H[prevId].leave();
@@ -1360,12 +1371,12 @@ H.leak = {
 
 /* -- juego de medidas: una carta cada vez -- */
 const MEASURES = [
-  { id: 'd1', good: false, t: 'Quitar solo el género', why: 'El barrio, la universidad o el empleo siguen delatando origen, clase y género.', law: 'Discriminación indirecta · art. 14 CE' },
-  { id: 'm1', good: true, t: 'Puntuar solo con nota, título e idiomas', why: 'Son los únicos datos de mérito. La universidad guarda el resto para el expediente, pero SELECTA no los usa.', law: 'Minimización · arts. 5.1.c y 25 RGPD' },
-  { id: 'd2', good: false, t: 'Que SELECTA decida sola, sin sesgos humanos', why: 'Aprendió de decisiones humanas: hereda sus sesgos y nadie la corrige.', law: 'Prohibido sin intervención humana · art. 22 RGPD' },
-  { id: 'm2', good: true, t: 'Una persona revisa todas las exclusiones', why: 'La revisión humana solo cuenta si puede cambiar el resultado.', law: 'Art. 22 RGPD · art. 26.2 RIA' },
-  { id: 'd3', good: false, t: 'Mantener en secreto cómo puntúa', why: 'Si nadie sabe cómo se puntúa, nadie puede recurrir.', law: 'Arts. 13–15 RGPD · art. 24 CE' },
-  { id: 'm3', good: true, t: 'Explicar a cada candidata sus motivos', why: 'Con los motivos en la mano, puede pedir revisión o recurrir.', law: 'Art. 22.3 RGPD · art. 86 RIA' }
+  { id: 'd1', tip: 'El art. 14 CE prohíbe discriminar. Una regla en apariencia neutra que perjudica más a un grupo también discrimina: el barrio o el empleo hacen de sustitutos del origen o el género.', good: false, t: 'Quitar solo el género', why: 'El barrio, la universidad o el empleo siguen delatando origen, clase y género.', law: 'Discriminación indirecta · art. 14 CE' },
+  { id: 'm1', tip: 'Solo pueden tratarse los datos necesarios para cada fin (art. 5.1.c). Para puntuar el mérito bastan tres. El art. 25 exige que el sistema venga configurado así desde el diseño y por defecto.', good: true, t: 'Puntuar solo con nota, título e idiomas', why: 'Son los únicos datos de mérito. La universidad guarda el resto para el expediente, pero SELECTA no los usa.', law: 'Minimización · arts. 5.1.c y 25 RGPD' },
+  { id: 'd2', tip: 'Nadie puede quedar sometido a una decisión basada solo en un tratamiento automatizado que le afecte de forma significativa, salvo excepciones tasadas y con garantías. Quedarse fuera de un máster habilitante lo es.', good: false, t: 'Que SELECTA decida sola, sin sesgos humanos', why: 'Aprendió de decisiones humanas: hereda sus sesgos y nadie la corrige.', law: 'Prohibido sin intervención humana · art. 22 RGPD' },
+  { id: 'm2', tip: 'Con una revisión humana real, la decisión deja de ser solo automatizada (art. 22 RGPD). El art. 26.2 RIA exige que la supervisen personas con formación y autoridad para corregir al sistema.', good: true, t: 'Una persona revisa todas las exclusiones', why: 'La revisión humana solo cuenta si puede cambiar el resultado.', law: 'Art. 22 RGPD · art. 26.2 RIA' },
+  { id: 'd3', tip: 'Los arts. 13 a 15 dan derecho a información significativa sobre la lógica de la decisión, también mediante el derecho de acceso. Sin esa información no hay forma real de recurrir (art. 24 CE).', good: false, t: 'Mantener en secreto cómo puntúa', why: 'Si nadie sabe cómo se puntúa, nadie puede recurrir.', law: 'Arts. 13–15 RGPD · art. 24 CE' },
+  { id: 'm3', tip: 'El art. 22.3 garantiza poder dar su punto de vista e impugnar la decisión; el art. 86 RIA, recibir una explicación de los motivos. Con ambos puede pedir revisión antes de la lista definitiva.', good: true, t: 'Explicar a cada candidata sus motivos', why: 'Con los motivos en la mano, puede pedir revisión o recurrir.', law: 'Art. 22.3 RGPD · art. 86 RIA' }
 ];
 function gs() { if (!S.game || !S.game.ans) S.game = { i: 0, phase: 'card', ans: {} }; return S.game; }
 const isOk = m => { const a = gs().ans[m.id]; return a ? (a === 'yes') === m.good : null; };
@@ -1381,7 +1392,7 @@ function gameRender(anim) {
     bindDrag($('#scard'));
   } else if (g.phase === 'result') {
     const m = MEASURES[g.i], ok = isOk(m);
-    area.innerHTML = `<div class="sresult ${ok ? 'good' : 'bad'}"><span class="sv">${ok ? I.check + '¡Bien visto!' : I.cross + '¡Cuidado!'}</span><p class="slabel">${m.good ? 'Esta medida funciona.' : 'Era una trampa.'}</p><p class="swhy">${m.why}</p><div><span class="law">${I.law}${m.law}</span></div></div>`;
+    area.innerHTML = `<div class="sresult ${ok ? 'good' : 'bad'}"><span class="sv">${ok ? I.check + '¡Bien visto!' : I.cross + '¡Cuidado!'}</span><p class="slabel">${m.good ? 'Esta medida funciona.' : 'Era una trampa.'}</p><p class="swhy">${m.why}</p><div><span class="law" data-tip="${esc(m.tip)}">${I.law}${m.law}</span></div></div>`;
   } else {
     area.innerHTML = `<div class="sresult done"><span class="sv">${hits} de ${MEASURES.length}</span><p class="slabel">Las que funcionan:</p><ul class="slist">${MEASURES.filter(m => m.good).map(m => `<li>${I.check}${m.t}</li>`).join('')}</ul><div><button class="linkbtn" id="gAgain">Volver a jugar</button></div></div>`;
   }
@@ -1483,6 +1494,30 @@ function mapPlace(after, animate) {
   });
 }
 H.map = { enter() { mapPlace(false, false); }, step(n, instant) { mapPlace(true, !instant); } };
+
+/* ================= Bocadillos de las leyes ================= */
+const tipBox = $('#tipbox');
+let tipFor = null;
+function showTip(el) {
+  if (!el || !el.dataset.tip) return;
+  tipFor = el; $$('.law.tip-on').forEach(x => x.classList.remove('tip-on')); el.classList.add('tip-on');
+  tipBox.textContent = el.dataset.tip; tipBox.classList.remove('below');
+  const r = el.getBoundingClientRect(), b = tipBox.getBoundingClientRect(), m = 12;
+  let left = Math.min(Math.max(m, r.left + r.width / 2 - b.width / 2), innerWidth - b.width - m);
+  let top = r.top - b.height - 12;
+  if (top < m) { top = r.bottom + 12; tipBox.classList.add('below'); }
+  tipBox.style.left = left + 'px'; tipBox.style.top = top + 'px';
+  tipBox.style.setProperty('--ax', Math.min(Math.max(16, r.left + r.width / 2 - left), b.width - 16) + 'px');
+  tipBox.classList.add('show');
+}
+function hideTip() { tipFor && tipFor.classList.remove('tip-on'); tipFor = null; tipBox.classList.remove('show'); }
+document.addEventListener('mouseover', e => { const l = e.target.closest('.law[data-tip]'); if (l && l !== tipFor) showTip(l); });
+document.addEventListener('mouseout', e => { const l = e.target.closest('.law[data-tip]'); if (l && !l.contains(e.relatedTarget)) hideTip(); });
+document.addEventListener('focusin', e => { const l = e.target.closest('.law[data-tip]'); if (l) showTip(l); });
+document.addEventListener('focusout', e => { if (e.target.closest('.law[data-tip]')) hideTip(); });
+document.addEventListener('click', e => { const l = e.target.closest('.law[data-tip]'); if (l) { e.stopPropagation(); tipFor === l ? hideTip() : showTip(l); } else if (tipFor) hideTip(); }, true);
+addEventListener('scroll', hideTip, true);
+addEventListener('resize', hideTip);
 
 /* ================= Controles globales ================= */
 document.addEventListener('click', e => {
