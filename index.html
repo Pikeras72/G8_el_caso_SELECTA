@@ -179,6 +179,16 @@ body[data-idx="0"] .hud-top>*{pointer-events:none}
 .laws{display:flex;flex-wrap:wrap;gap:8px}
 .law[data-tip]{cursor:help;transition:background .2s,border-color .2s}
 .law[data-tip]:hover,.law[data-tip]:focus-visible,.law[data-tip].tip-on{background:rgba(255,255,255,.2);border-color:var(--sun)}
+.riskcmp{display:flex;align-items:center;justify-content:center;gap:clamp(12px,calc(var(--u)*3),44px);flex-wrap:wrap;width:100%}
+.rbox{display:grid;justify-items:center;gap:6px;min-width:min(300px,100%);padding:clamp(16px,calc(var(--u)*2.6),34px) clamp(22px,calc(var(--u)*4),56px);border-radius:var(--r)}
+.rbox.hi{background:linear-gradient(150deg,rgba(255,71,96,.95),rgba(160,16,60,.9));box-shadow:0 10px 0 #7a0f2f,0 0 60px rgba(255,71,96,.45)}
+.rbox.mid{background:linear-gradient(150deg,rgba(255,201,60,.97),rgba(255,107,44,.92));color:var(--ink);box-shadow:0 10px 0 #b45a18,0 0 60px rgba(255,201,60,.45)}
+.rwhen{font-weight:800;font-size:var(--t-small);letter-spacing:.14em;text-transform:uppercase}
+.rlvl{font-family:var(--f-display);font-weight:400;font-size:var(--t-mega);line-height:1}
+.rmix{font-family:var(--f-mono);font-weight:600;font-size:var(--t-small)}
+.rarrow{width:clamp(44px,calc(var(--u)*6),80px);height:auto;color:var(--paper)}
+.shown.rbox{animation:stamp .55s cubic-bezier(.2,1.6,.4,1) both}
+@media (max-width:700px){.rarrow{transform:rotate(90deg)}}
 .tipbox{position:fixed;z-index:60;left:0;top:0;width:max-content;max-width:min(400px,calc(100vw - 32px));padding:12px 15px;border-radius:14px;
   background:var(--card);color:var(--card-ink);font-family:var(--f-body);font-weight:600;font-size:clamp(15px,calc(var(--u)*1.3),19px);line-height:1.38;
   box-shadow:0 18px 44px rgba(0,0,0,.45),0 0 0 2px var(--sun);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .16s,transform .16s}
@@ -866,12 +876,17 @@ button{font:inherit}
 </section>
 
 <!-- 23 · Cierre -->
-<section class="slide" id="s-end" data-scene="end" data-chapter="6" data-steps="1">
+<section class="slide" id="s-end" data-scene="end" data-chapter="6" data-steps="2">
   <div class="wrap center stack">
-    <h2 class="mega rv" style="--i:0"><span data-b="first"></span> y SELECTA son inventadas.</h2>
-    <p class="lead rv" style="--i:1">El riesgo es real: el Reglamento de IA ya considera <strong>de alto riesgo</strong> los sistemas que deciden quién entra en una universidad.</p>
-    <div class="laws rv" style="--i:2"><span class="law" data-icon-law data-tip="El Reglamento de IA considera de alto riesgo los sistemas que deciden el acceso o la admisión a centros educativos. SELECTA lo es: debe cumplir requisitos de supervisión humana, calidad de los datos y transparencia.">Anexo III, punto 3 · Reglamento de IA</span></div>
-    <p class="big-q" data-step="1">Si mañana una máquina decidiera vuestra plaza, <span class="hl">¿qué querríais saber?</span></p>
+    <p class="kicker rv" style="--i:0"><span data-b="first"></span> y SELECTA son inventadas. El riesgo, no.</p>
+    <h2 class="h1 rv" style="--i:1">Riesgo de SELECTA</h2>
+    <div class="riskcmp">
+      <div class="rbox hi rv" style="--i:2"><span class="rwhen">Sin medidas</span><b class="rlvl">Alto</b><span class="rmix">9 riesgos altos · 4 medios</span></div>
+      <svg class="rarrow" data-step="1" viewBox="0 0 60 40" aria-hidden="true"><path d="M4 20h44M36 6l14 14-14 14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="rbox mid" data-step="1"><span class="rwhen">Con medidas</span><b class="rlvl">Medio</b><span class="rmix">0 altos · 5 medios · 8 bajos</span></div>
+    </div>
+    <div class="laws rv" style="--i:3"><span class="law" data-icon-law data-tip="El Reglamento de IA considera de alto riesgo los sistemas que deciden el acceso o la admisión a centros educativos. SELECTA lo es: debe cumplir requisitos de supervisión humana, calidad de los datos y transparencia.">Sistema de alto riesgo · Anexo III, punto 3 RIA</span></div>
+    <p class="lead" data-step="2">Con estas medidas, SELECTA puede ayudar a la Comisión <strong class="hl">sin dejar a nadie fuera sin una explicación.</strong></p>
   </div>
 </section>
 
@@ -1088,7 +1103,7 @@ const NOTES = {
   'replay': [20, 'Repetición', '«Misma persona, mismos méritos, nuevas reglas.» Clic: la Comisión revisa y motiva.'],
   'final': [12, 'Cierre del círculo', 'La misma notificación del principio, ahora con motivos y una vía para pedir revisión.'],
   'map': [20, 'Mapa de riesgos', '«Nuestra evaluación tiene 13 riesgos.» Clic: los riesgos bajan de franja. Ninguno se queda en alto.'],
-  'end': [20, 'Final', 'Frase final. Clic: la pregunta. Deja que respondan dos o tres personas: quién decidió, por qué, cómo recurrir.'],
+  'end': [20, 'Final', 'La protagonista y SELECTA son inventadas, el riesgo no. Sin medidas el riesgo del sistema es alto (9 altos, 4 medios). Clic: con medidas, medio (0 altos, 5 medios, 8 bajos). Clic: frase de cierre.'],
   'thanks': [10, 'Preguntas', 'Agradece y abre el turno de preguntas.']
 };
 
