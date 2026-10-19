@@ -40,6 +40,7 @@
   --t-small:clamp(.78rem,calc(var(--u)*1.05),1.05rem);
   --r:clamp(0.75rem,calc(var(--u)*1.4),1.375rem);
 }
+[hidden]{display:none!important}
 html{font-size:clamp(16px,calc(min(1vw,1.78vh)*.9),32px)}
 html,body{height:100%}
 body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body);font-size:var(--t-body);line-height:1.4;overflow:hidden;
@@ -519,6 +520,10 @@ button{font:inherit}
 .sresult.good{background:rgba(34,227,166,.18);border-color:var(--mint)}
 .sresult.bad{background:rgba(255,71,96,.2);border-color:var(--danger)}
 .sresult.done{background:rgba(10,4,24,.45);border-color:var(--sun)}
+.smeta{font-family:var(--f-mono);font-weight:600;font-size:var(--t-small);color:var(--paper-2)}
+.smeasure{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.05rem,calc(var(--u)*1.9),2rem);line-height:1.12;color:var(--paper);text-wrap:balance}
+.sresult .sv{font-size:var(--t-h2)}
+.sresult{gap:10px}
 .sv{display:flex;align-items:center;gap:.35em;font-family:var(--f-display);font-size:var(--t-h1);line-height:1}
 .sv svg{width:.9em;height:.9em;flex:none}
 .sresult.good .sv{color:var(--mint)} .sresult.bad .sv{color:#ff9aab} .sresult.done .sv{color:var(--sun)}
@@ -887,7 +892,7 @@ button{font:inherit}
   <div class="wrap stack">
     <div class="row" style="justify-content:space-between">
       <span class="stop rv" style="--i:0"><span data-icon="hand"></span><span class="num">Parada 5</span> ¿La aplicaríais?</span>
-      <div class="gtop rv" style="--i:1"><div class="gdots" id="gdots"></div><span><span id="ghits">0</span> aciertos</span></div>
+      <div class="gtop rv" style="--i:1"><div class="gdots" id="gdots"></div><span><span id="ghits">0</span> <span id="ghitsW">aciertos</span></span></div>
     </div>
     <div class="swipe rv" style="--i:2">
       <button class="zone left" id="zNo"><span data-icon="cross"></span>Rechazar</button>
@@ -1500,7 +1505,7 @@ function gameRender(anim) {
   const g = gs(), area = $('#deckArea');
   $('#gdots').innerHTML = MEASURES.map((m, i) => { const ok = isOk(m); return `<i class="${g.phase !== 'done' && i === g.i ? 'cur' : ''}${ok === true ? ' ok' : ok === false ? ' ko' : ''}"></i>`; }).join('');
   const hits = MEASURES.filter(m => isOk(m) === true).length;
-  $('#ghits').textContent = hits;
+  $('#ghits').textContent = hits; $('#ghitsW').textContent = hits === 1 ? 'acierto' : 'aciertos';
   $('#swBtns').hidden = g.phase !== 'card';
   if (g.phase === 'card') {
     const m = MEASURES[g.i];
@@ -1508,7 +1513,7 @@ function gameRender(anim) {
     bindDrag($('#scard'));
   } else if (g.phase === 'result') {
     const m = MEASURES[g.i], ok = isOk(m);
-    area.innerHTML = `<div class="sresult ${ok ? 'good' : 'bad'}"><span class="sv">${ok ? I.check + '¡Bien visto!' : I.cross + '¡Cuidado!'}</span><p class="slabel">${m.good ? 'Esta medida funciona.' : 'Era una trampa.'}</p><p class="swhy">${m.why}</p><div><span class="law" data-tip="${esc(m.tip)}">${I.law}${m.law}</span></div></div>`;
+    area.innerHTML = `<div class="sresult ${ok ? 'good' : 'bad'}"><span class="smeta">Medida ${g.i + 1} de ${MEASURES.length}</span><p class="smeasure">«${m.t}»</p><span class="sv">${ok ? I.check + '¡Bien visto!' : I.cross + '¡Cuidado!'}</span><p class="slabel">${m.good ? 'Esta medida funciona.' : 'Era una trampa.'}</p><p class="swhy">${m.why}</p><div><span class="law" data-tip="${esc(m.tip)}">${I.law}${m.law}</span></div></div>`;
   } else {
     area.innerHTML = `<div class="sresult done"><span class="sv">${hits} de ${MEASURES.length}</span><p class="slabel">Las que funcionan:</p><ul class="slist">${MEASURES.filter(m => m.good).map(m => `<li>${I.check}${m.t}</li>`).join('')}</ul><div><button class="linkbtn" id="gAgain">Volver a jugar</button></div></div>`;
   }
